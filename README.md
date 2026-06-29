@@ -1,5 +1,7 @@
 # 💪 FitTrack
 
+
+🔗 **[Try the live app here](https://fittrack-3ketdzzspuffuakeejzyml.streamlit.app/)**
 A full-stack fitness and nutrition tracking application with AI-powered meal estimation, built in Python.
 
 FitTrack lets users log meals and workouts, track daily nutrition using real USDA data, get AI-estimated nutrition for foods not in the database (like regional dishes), calculate maintenance calories for bulking/cutting, and visualize progress over time — all behind secure multi-user authentication.
