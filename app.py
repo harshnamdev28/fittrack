@@ -158,42 +158,42 @@ elif page == "📊 Charts":
         elif chart_choice == "Workout Volume":
             workout_chart(st.session_state.user_id)
 elif page == "📅 Daily Summary":
-    st.write("### 📅 Today's Summary")
+    st.write("### 📅 Daily Summary")
+    
+    selected_date = st.date_input("Select a date", value=date.today())
     
     st.write("#### 🍽️ Meals")
     conn = get_connection()
-    df = pd.read_sql_query("SELECT * FROM food_log WHERE user_id=?", conn, params=(st.session_state.user_id ,))
+    df = pd.read_sql_query("SELECT * FROM food_log WHERE user_id=?", conn, params=(st.session_state.user_id,))
     conn.close()
     
     df["date"] = df["date"].astype(str)
-    today = str(date.today())
-    today_df = df[df["date"] == today]
-        
+    today_df = df[df["date"] == str(selected_date)]
+    
     if today_df.empty:
-        st.info("No meals logged today!")
+        st.info(f"No meals logged on {selected_date}!")
     else:
         st.dataframe(today_df[["meal", "calories", "protein", "carbs"]])
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Calories", f"{today_df['calories'].sum()}kcal ")
         col2.metric("Total Protein", f"{today_df['protein'].sum()} g")
         col3.metric("Total Carbs", f"{today_df['carbs'].sum()} g")
-    
-
 
 elif page == "📅 Workout Summary":
-    st.write("### 📅 Today's Workout Summary")
+    st.write("### 📅 Workout Summary")
+    
+    selected_date = st.date_input("Select a date", value=date.today(), key="workout_date")
     
     st.write("#### Workout")
-    conn=get_connection()
-    df=pd.read_sql_query("SELECT * FROM workout_log WHERE user_id=?",conn, params=(st.session_state.user_id,))
+    conn = get_connection()
+    df = pd.read_sql_query("SELECT * FROM workout_log WHERE user_id=?", conn, params=(st.session_state.user_id,))
     conn.close()
     
     df["date"] = df["date"].astype(str)
-    today = str(date.today())
-    today_df = df[df["date"] == today]
+    today_df = df[df["date"] == str(selected_date)]
         
     if today_df.empty:
-         st.info("No Workout logged today!")
+         st.info("No Workout logged on {selected_date}!")
     else:
          st.dataframe(today_df[["exercise", "sets", "reps", "weight"]])
             
