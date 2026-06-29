@@ -8,6 +8,8 @@ from database import get_connection
 import streamlit as st
 from auth import signup, login
 from calorie_calculator import calculate_maintenance_streamlit
+from database import init_db
+init_db()
 
 
 st.set_page_config(page_title="FitTrack", page_icon="💪")
