@@ -8,7 +8,11 @@ import json
 from dotenv import load_dotenv
 load_dotenv()
 
-USDA_API_KEY = os.getenv("USDA_API_KEY")
+try:
+    import streamlit as st
+    USDA_API_KEY = st.secrets["USDA_API_KEY"]
+except (ImportError, KeyError, FileNotFoundError):
+    USDA_API_KEY = os.getenv("USDA_API_KEY")
 
 def extract_nutrients(nutrients_list):
     calories = protein = carbs = fibre = fat = 0
@@ -56,7 +60,11 @@ def daily_summary(user_id):
      
 
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+try:
+    import streamlit as st
+    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+except (ImportError, KeyError, FileNotFoundError):
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 def estimate_nutrition_ai(meal_name):
