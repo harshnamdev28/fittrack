@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+fittrack.db
+.env
+test_db.py
+check_workout.py
+test_ai.py
+test.py
+migrate.py
+migrate_user.py
